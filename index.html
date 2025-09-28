@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Profil Saya - Mobile</title>
+
+  <!-- Meta SEO dan Social Sharing -->
+  <meta property="og:title" content="Profil Khoirul Anam" />
+  <meta property="og:description" content="Saya seorang freelancer web developers." />
+  <meta property="og:image" content="img/jajal.jpg" />
+  <meta property="og:url" content="https://profilkamu.com" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Meta theme color untuk status bar mobile -->
+  <meta name="theme-color" content="#347388" />
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121212" />
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Feather Icons CDN -->
+  <script src="https://unpkg.com/feather-icons"></script>
+
+  <style>
+    body {
+      min-height: 100vh;
+      background: linear-gradient(to bottom, #45b9eb, #347388, #c0c6c9);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: #000;
+      transition: background-color 0.4s ease, color 0.4s ease;
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      padding: 1rem;
+    }
+
+    /* Dark mode */
+    body.dark-mode {
+      background: #121212;
+      color: #eee;
+    }
+
+    body.dark-mode .card {
+      background: rgba(30, 30, 30, 0.85);
+      border-color: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 24px rgba(255, 255, 255, 0.1);
+      color: #eee;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 16px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      color: #000;
+      width: 100%;
+      max-width: 400px;
+      padding: 1.5rem 1.5rem 2rem;
+      text-align: center;
+    }
+
+    .profile-photo {
+      border-radius: 50%;
+      width: 110px;
+      height: 110px;
+      object-fit: cover;
+      margin-bottom: 1rem;
+    }
+
+    /* Tombol sosial media full lebar, besar, nyaman sentuh */
+    .btn-social {
+      width: 100%;
+      font-size: 1.2rem;
+      padding: 0.75rem;
+      border-radius: 10px;
+      border: 2px solid #347388;
+      color: #347388;
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      cursor: pointer;
+      user-select: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-social:hover,
+    .btn-social:focus {
+      background-color: #347388;
+      color: white;
+      outline: none;
+    }
+
+    body.dark-mode .btn-social {
+      border-color: #87c1ff;
+      color: #87c1ff;
+    }
+
+    body.dark-mode .btn-social:hover,
+    body.dark-mode .btn-social:focus {
+      background-color: #87c1ff;
+      color: #121212;
+    }
+
+    /* Ripple effect */
+    .ripple-container {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      transform: scale(0);
+      animation: ripple-animation 0.6s linear;
+      background-color: rgba(0, 0, 0, 0.1);
+      pointer-events: none;
+    }
+
+    @keyframes ripple-animation {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+
+    /* WhatsApp footer style */
+    footer {
+      margin-top: 1.5rem;
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .whatsapp-link {
+      color: #128C7E;
+      font-weight: 600;
+      font-size: 1.1rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: color 0.3s ease, transform 0.2s ease;
+      user-select: none;
+    }
+
+    .whatsapp-link i {
+      stroke: #128C7E;
+      transition: stroke 0.3s ease;
+    }
+
+    .whatsapp-link:hover {
+      color: #075E54;
+      transform: scale(1.1);
+      text-decoration: underline;
+    }
+
+    .whatsapp-link:hover i {
+      stroke: #075E54;
+    }
+
+    body.dark-mode .whatsapp-link {
+      color: #5bd1a3;
+    }
+
+    body.dark-mode .whatsapp-link i {
+      stroke: #5bd1a3;
+    }
+
+    body.dark-mode .whatsapp-link:hover {
+      color: #38a169;
+      text-decoration: underline;
+    }
+
+    body.dark-mode .whatsapp-link:hover i {
+      stroke: #38a169;
+    }
+
+    /* Dark mode toggle button fixed at top right */
+    #darkModeToggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      outline: none;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #347388;
+      transition: color 0.4s ease;
+      z-index: 1000;
+    }
+
+    body.dark-mode #darkModeToggle {
+      color: #87c1ff;
+    }
+
+    #darkModeToggle .icon {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    #darkModeToggle .sun {
+      opacity: 1;
+      transform: rotate(0deg) scale(1);
+    }
+
+    body.dark-mode #darkModeToggle .sun {
+      opacity: 0;
+      transform: rotate(90deg) scale(0);
+    }
+
+    #darkModeToggle .moon {
+      opacity: 0;
+      transform: rotate(-90deg) scale(0);
+    }
+
+    body.dark-mode #darkModeToggle .moon {
+      opacity: 1;
+      transform: rotate(0deg) scale(1);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Dark mode toggle -->
+  <button id="darkModeToggle" aria-label="Toggle dark mode">
+    <svg class="icon sun" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2"
+      stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="5" />
+      <line x1="12" y1="1" x2="12" y2="3" />
+      <line x1="12" y1="21" x2="12" y2="23" />
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+      <line x1="1" y1="12" x2="3" y2="12" />
+      <line x1="21" y1="12" x2="23" y2="12" />
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+    </svg>
+    <svg class="icon moon" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2"
+      stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+      <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+    </svg>
+  </button>
+
+  <!-- Card -->
+  <div class="card">
+    <img src="img/jajal.jpg" alt="Foto profil Khoirul Anam" class="profile-photo mx-auto d-block" />
+    <h1 class="h4 mb-1">Khoirul Anam</h1>
+    <p class="mb-4 text-secondary">Saya seorang freelancer web developers.</p>
+
+    <div class="d-grid gap-3">
+      <a href="https://instagram.com/anam01213" target="_blank" class="btn-social ripple-container" rel="noopener noreferrer" aria-label="Instagram Khoirul Anam">
+        <i data-feather="instagram"></i> Instagram
+      </a>
+      <a href="https://linkedin.com/in/khoirul-anam" target="_blank" class="btn-social ripple-container" rel="noopener noreferrer" aria-label="LinkedIn Khoirul Anam">
+        <i data-feather="linkedin"></i> LinkedIn
+      </a>
+      <a href="https://github.com/khoirul49" target="_blank" class="btn-social ripple-container" rel="noopener noreferrer" aria-label="GitHub Khoirul Anam">
+        <i data-feather="github"></i> GitHub
+      </a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <a href="https://wa.me/628997340399" target="_blank" class="whatsapp-link" aria-label="Hubungi saya via WhatsApp" rel="noopener noreferrer">
+      <i data-feather="message-circle"></i> Hubungi saya via WhatsApp
+    </a>
+  </footer>
+
+  <!-- Feather Icons -->
+  <script src="https://unpkg.com/feather-icons"></script>
+
+  <!-- Ripple Effect Script -->
+  <script>
+    document.querySelectorAll('.ripple-container').forEach((button) => {
+      button.addEventListener('click', function (e) {
+        const circle = document.createElement('span');
+        circle.classList.add('ripple');
+        const rect = this.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        circle.style.width = circle.style.height = size + 'px';
+        circle.style.left = e.clientX - rect.left - size / 2 + 'px';
+        circle.style.top = e.clientY - rect.top - size / 2 + 'px';
+        this.appendChild(circle);
+        setTimeout(() => circle.remove(), 600);
+      });
+    });
+  </script>
+
+  <!-- Feather Icons Init -->
+  <script>
+    feather.replace();
+  </script>
+
+  <!-- Dark Mode Toggle Script -->
+  <script>
+    const toggleBtn = document.getElementById('darkModeToggle');
+    const body = document.body;
+
+    function updateToggleIcon() {
+      const sunIcon = toggleBtn.querySelector('.sun');
+      const moonIcon = toggleBtn.querySelector('.moon');
+      if (body.classList.contains('dark-mode')) {
+        sunIcon.style.opacity = '0';
+        moonIcon.style.opacity = '1';
+      } else {
+        sunIcon.style.opacity = '1';
+        moonIcon.style.opacity = '0';
+      }
+    }
+
+    // Load saved mode from localStorage
+    if (localStorage.getItem('darkMode') === 'enabled') {
+      body.classList.add('dark-mode');
+    }
+    updateToggleIcon();
+
+    toggleBtn.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      if (body.classList.contains('dark-mode')) {
+        localStorage.setItem('darkMode', 'enabled');
+      } else {
+        localStorage.removeItem('darkMode');
+      }
+      updateToggleIcon();
+    });
+  </script>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
